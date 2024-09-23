@@ -13,6 +13,14 @@ static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
+    if (len > 0)
+    {
+        len = 1;
+    }
+    else
+    {
+        len = 0;
+    }
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
