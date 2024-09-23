@@ -13,10 +13,16 @@ static TBitField FAKE_BITFIELD(1);
 
 TBitField::TBitField(int len)
 {
-    if (len == 1)
-    {
-        len = 1;
-    }
+	if (len > 0) 
+	{
+		BitLen = len; //длинна
+		MemLen = (len + (sizeof(TELEM) << 3) - 1) / (sizeof(TELEM) << 3);
+		pMem = new TELEM[MemLen];
+		fill(pMem, pMem + MemLen, 0);
+	}
+	else {
+		throw length_error("bit field lenght can't be below or equals to zero");
+	}
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
