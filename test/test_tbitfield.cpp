@@ -7,6 +7,46 @@ TEST(TBitField, can_create_bitfield_with_positive_length)
   ASSERT_NO_THROW(TBitField bf(3));
 }
 
+TEST(TBitField, can_make_copy_right_bit_len) // my test1
+{
+    TBitField a(16);
+    TBitField b = a;
+    
+    EXPECT_EQ(16, b.GetLength());
+}
+
+TEST(TBitField, can_xor) {  //my test 2
+
+    TBitField a(5),b(5);
+    TBitField c(5);
+    c.SetBit(0);
+    c.SetBit(1);
+    c.SetBit(4);
+    a.SetBit(1);
+    a.SetBit(2);
+    b.SetBit(0);
+    b.SetBit(2);
+    b.SetBit(4);
+    TBitField f = ((a & (~b)) | (b & (~a)));
+    EXPECT_EQ(f, c);
+}
+
+TEST(TBitField, can_make_U_peresech_Bit) //my test3
+{
+    TBitField a(5);
+    a.SetBit(3);
+    a.SetBit(0);
+    TBitField b = ~a;
+    TBitField c(5);
+    c.SetBit(0);
+    c.SetBit(1);
+    c.SetBit(2);
+    c.SetBit(3);
+    c.SetBit(4);
+
+    EXPECT_EQ(c, b | a);
+}
+
 TEST(TBitField, can_get_length)
 {
   TBitField bf(3);
