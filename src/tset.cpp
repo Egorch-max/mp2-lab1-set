@@ -42,10 +42,10 @@ int TSet::GetMaxPower(void) const // получить макс. к-во эл-т�
 
 int TSet::IsMember(const int Elem) const // элемент множества?
 {
-    if (Elem > MaxPower - 1 &&  Elem < 0) 
+    if (Elem > MaxPower - 1 ||  Elem < 0) //исправил
 
     {
-        return 0;
+        throw out_of_range("out of U");
     }
 
     return BitField.GetBit(Elem);
@@ -53,7 +53,7 @@ int TSet::IsMember(const int Elem) const // элемент множества?
 
 void TSet::InsElem(const int Elem) // включение элемента множества
 {
-    if (Elem > MaxPower - 1 && Elem < 0)
+    if (Elem > MaxPower - 1 || Elem < 0)
 
     {
 
@@ -65,7 +65,7 @@ void TSet::InsElem(const int Elem) // включение элемента мно
 
 void TSet::DelElem(const int Elem) // исключение элемента множества
 {
-    if (Elem > MaxPower - 1 && Elem < 0)
+    if (Elem > MaxPower - 1 || Elem < 0)
 
     {
         throw out_of_range("out of U");
@@ -89,13 +89,8 @@ TSet& TSet::operator=(const TSet &s) // присваивание
 
 int TSet::operator==(const TSet &s) const // сравнение
 {
-    if (MaxPower != s.MaxPower)
-
-    {
-        return 0;
-    }
-
-    if (BitField != s.BitField)
+    
+    if (BitField != s.BitField) //исправил
 
     {
         return 0;
@@ -165,40 +160,14 @@ TSet TSet::operator~(void) // дополнение
 
 istream &operator>>(istream &istr, TSet &s) // ввод
 {
-    int k;
-
-    istr >> k;
-
-    int v;
-
-    for (int i = 0; i < k; i++) 
-
-    {
-        istr >> v;
-
-        s.InsElem(v);
-    }
+    istr >> s.BitField; //исправил
 
     return istr;
 }
 
 ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 {
-    int l = 0;
-
-    string r = "";
-
-    for (int i = 0; i < s.MaxPower; i++) 
-    {
-        if (s.IsMember(i) == 1)
-        {
-            l++;
-            r += to_string(i) + " ";
-        }
-    }
-    r = to_string(l) + " " + r;
-
-    ostr << r;
+    ostr << s.BitField; //исправил
 
     return ostr;
 }

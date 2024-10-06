@@ -8,6 +8,7 @@
 #include "tbitfield.h"
 #include <string>
 #include <exception>
+#include <algorithm> //исправил
 
 // Fake variables used as placeholders in tests
 //static const int FAKE_INT = -1;
@@ -25,6 +26,11 @@ TBitField::TBitField(int len)
 	MemLen = BitLen / (sizeof(TELEM) * 8) + (BitLen % (sizeof(TELEM) * 8) != 0);
 
 	pMem = new TELEM[MemLen];
+	
+	if (pMem == nullptr) //исправил
+	{
+		throw bad_alloc();
+	}
 
 	memset(pMem, 0, MemLen * sizeof(TELEM));
 }
@@ -36,6 +42,11 @@ TBitField::TBitField(const TBitField &bf) // конструктор копиро
 	MemLen = bf.MemLen;
 
 	pMem = new TELEM[MemLen];
+
+	if (pMem == nullptr) //исправил
+	{
+		throw bad_alloc();
+	}
 
 	for (int i = 0; i < MemLen; i++) 
 
@@ -51,6 +62,8 @@ TBitField::~TBitField()
 	BitLen = 0;
 
 	MemLen = 0;
+
+	pMem = nullptr; //исправил
 }
 
 int TBitField::GetMemIndex(const int n) const // индекс Мем для бита n
@@ -121,13 +134,21 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 	if (this != &bf) 
 	{
+		if (bf.MemLen != MemLen) //исправил
+		{
+			MemLen = bf.MemLen;
+
+			delete[] pMem;
+
+			pMem = new TELEM[MemLen];
+
+			if (pMem == nullptr) //исправил
+			{
+				throw bad_alloc();
+			}
+		}
+		
 		BitLen = bf.BitLen;
-
-		MemLen = bf.MemLen;
-
-		delete[] pMem;
-
-		pMem = new TELEM[MemLen];
 
 		for (int i = 0; i < MemLen; i++) 
 
@@ -142,41 +163,25 @@ TBitField& TBitField::operator=(const TBitField &bf) // присваивание
 
 int TBitField::operator==(const TBitField &bf) const // сравнение
 {
-  int a = min(MemLen, bf.MemLen);
+	if (BitLen != bf.BitLen) //исправил
+	{
+		return 0;
+    }
 
-  for (int i = 0; i < a; i++) 
+	for (int i = 0; i < MemLen; i++)
+	{
+		if (pMem[i] != bf.pMem[i])
+		{
+			return 0;
+		}
+	}
 
-  {
-	  if (pMem[i] != bf.pMem[i])
-
-		  return 0;
-  }
-
-  if (MemLen < bf.MemLen) 
-  {
-	  for (int i = a; i < bf.MemLen; i++) 
-	  {
-		  if (bf.pMem[i] != 0)
-
-			  return 0;
-	  }
-  }
-  else
-  {
-	  for (int i = a; i < MemLen; i++) 
-	  {
-		  if (pMem[i] != 0)
-
-			  return 0;
-	  }
-  }
-
-  return 1;
+	return 1;
 }
 
 int TBitField::operator!=(const TBitField &bf) const // сравнение
 {
-  return 1 - (*this == bf);
+  return !(*this == bf); //исправил
 }
 
 TBitField TBitField::operator|(const TBitField &bf) // операция "или"
@@ -210,9 +215,7 @@ TBitField TBitField::operator|(const TBitField &bf) // операция "или"
 			mas.pMem[i] = pMem[i];
 		}
 	}
-	TELEM d = ((TELEM)1 << (b % (sizeof(TELEM) * 8))) - (TELEM)1;
-
-	mas.pMem[max(MemLen, bf.MemLen)-1] &= d;
+	//исправил
 
 	return mas;
 }
