@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+#include "gtest.h"
+
 using namespace std;
 
 typedef unsigned int TELEM;
@@ -51,5 +53,18 @@ public:
 //   массив pМем рассматривается как последовательность MemLen элементов
 //   биты в эл-тах pМем нумеруются справа налево (от младших к старшим)
 // О8 Л2 П4 С2
+
+class TestTBitField : public ::testing::Test 
+{
+protected:
+	TBitField* a0, * a1, * a2, * a3, * b0, * b1, * b2, * b3, * c0,
+		* c1, * d0, * d1, * e0, * f0, * f1, * f2, * f3;
+
+	void SetUp_0();
+
+	void SetUp_1(int k);
+
+	void TearDown();
+};
 
 #endif

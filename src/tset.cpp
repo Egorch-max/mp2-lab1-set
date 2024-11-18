@@ -171,3 +171,61 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 
     return ostr;
 }
+
+//Fixtures
+
+void TestTSet::SetUp_0()
+{
+    s = new TSet(1);        
+
+
+    s0 = new TSet(2);
+
+    s1 = new TSet(3);
+
+    s2 = new TSet(4);
+
+    s3 = new TSet(5);
+
+    s4 = new TSet(6);
+
+    s5 = new TSet(7);
+
+    s6 = new TSet(8);
+
+    s7 = new TSet(9);
+
+
+    s00 = new TSet(20);
+
+    s01 = new TSet(21);
+
+    s02 = new TSet(22);
+
+    s03 = new TSet(23);
+
+    s04 = new TSet(24);
+}
+
+void TestTSet::SetUp_1(int k)
+{
+    s = new TSet(k);
+}
+
+void TestTSet::TearDown()
+{
+    delete s;
+    delete s0;
+    delete s1;
+    delete s2;
+    delete s3;
+    delete s4;
+    delete s5;
+    delete s6;
+    delete s7;
+    delete s00;
+    delete s01;
+    delete s02;
+    delete s03;
+    delete s04;
+}
