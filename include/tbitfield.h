@@ -57,12 +57,12 @@ public:
 class TestTBitField : public ::testing::Test 
 {
 protected:
-	TBitField* a0, * a1, * a2, * a3, * b0, * b1, * b2, * b3, * c0,
+	TBitField* bf, * a1, * a2, * a3, * b0, * b1, * b2, * b3, * c0,
 		* c1, * d0, * d1, * e0, * f0, * f1, * f2, * f3;
 
-	void SetUp_0();
+	void SetUp();
 
-	void SetUp_1(int k);
+	void SetUp2(int k);
 
 	void TearDown();
 };

@@ -311,9 +311,9 @@ ostream &operator<<(ostream &ostr, const TBitField &bf) // вывод
 
 //Fixtures
 
-void TestTBitField::SetUp_0()
+void TestTBitField::SetUp()
 {
-	a0 = new TBitField(1);        
+	bf = new TBitField(1);        
 
 	a1 = new TBitField(2);     
 
@@ -352,14 +352,14 @@ void TestTBitField::SetUp_0()
 
 }
 
-void TestTBitField::SetUp_1(int k)
+void TestTBitField::SetUp2(int k)
 {
-	a0 = new TBitField(k);
+	bf = new TBitField(k);
 }
 
 void TestTBitField::TearDown()
 {
-	delete a0;
+	delete bf;
 	delete a1;
 	delete a2;
 	delete a3;

@@ -2,12 +2,9 @@
 
 #include <gtest.h>
 
-TEST(TSet, can_get_max_power_set)
+TEST_F(TestTSet, can_get_max_power_set)
 {
-  const int size = 5;
-  TSet set(size);
-
-  EXPECT_EQ(size, set.GetMaxPower());
+  EXPECT_EQ(5, s->GetMaxPower());
 }
 
 TEST(TSet, can_make_copy_right_max_power)	//my test1
@@ -48,24 +45,22 @@ TEST(TSet, can_make_U_peresech) //my test3
 	 
 	EXPECT_EQ(c, b + a);
 }
-TEST(TSet, can_insert_non_existing_element)
+TEST_F(TestTSet, can_insert_non_existing_element)
 {
-  const int size = 5, k = 3;
-  TSet set(size);
-  set.InsElem(k);
-
-  EXPECT_NE(set.IsMember(k), 0);
+	const int k = 3;
+	s->InsElem(k);
+	EXPECT_NE(s->IsMember(k), 0);
 }
 
-TEST(TSet, can_insert_existing_element)
+TEST_F(TestTSet, can_insert_existing_element)
 {
-  const int size = 5;
+ 
   const int k = 3;
-  TSet set(size);
-  set.InsElem(k);
-  set.InsElem(k);
 
-  EXPECT_NE(set.IsMember(k), 0);
+  s->InsElem(k);
+  s->InsElem(k);
+
+  EXPECT_NE(s->IsMember(k), 0);
 }
 
 TEST(TSet, can_delete_non_existing_element)

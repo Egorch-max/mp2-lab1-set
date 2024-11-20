@@ -2,9 +2,9 @@
 
 #include <gtest.h>
 
-TEST(TBitField, can_create_bitfield_with_positive_length)
+TEST_F(TestTBitField, can_create_bitfield_with_positive_length)
 {
-  ASSERT_NO_THROW(TBitField bf(3));
+  ASSERT_NO_THROW(this->SetUp2(1));
 }
 
 TEST(TBitField, can_make_copy_right_bit_len) // my test1
@@ -47,21 +47,18 @@ TEST(TBitField, can_make_U_peresech_Bit) //my test3
     EXPECT_EQ(c, b | a);
 }
 
-TEST(TBitField, can_get_length)
+TEST_F(TestTBitField, can_get_length)
 {
-  TBitField bf(3);
-
-  EXPECT_EQ(3, bf.GetLength());
+  EXPECT_EQ(1, bf->GetLength());
 }
 
-TEST(TBitField, new_bitfield_is_set_to_zero)
+TEST_F(TestTBitField, new_bitfield_is_set_to_zero)
 {
-  TBitField bf(100);
-
   int sum = 0;
-  for (int i = 0; i < bf.GetLength(); i++)
+
+  for (int i = 0; i < bf->GetLength(); i++)
   {
-    sum += bf.GetBit(i);
+    sum += this->bf->GetBit(i);
   }
 
   EXPECT_EQ(0, sum);

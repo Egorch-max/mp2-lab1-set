@@ -174,9 +174,9 @@ ostream& operator<<(ostream &ostr, const TSet &s) // вывод
 
 //Fixtures
 
-void TestTSet::SetUp_0()
+void TestTSet::SetUp()
 {
-    s = new TSet(1);        
+    s = new TSet(5);        
 
 
     s0 = new TSet(2);
@@ -207,7 +207,7 @@ void TestTSet::SetUp_0()
     s04 = new TSet(24);
 }
 
-void TestTSet::SetUp_1(int k)
+void TestTSet::SetUp2(int k)
 {
     s = new TSet(k);
 }
