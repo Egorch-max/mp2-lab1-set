@@ -54,17 +54,5 @@ public:
 //   биты в эл-тах pМем нумеруются справа налево (от младших к старшим)
 // О8 Л2 П4 С2
 
-class TestTBitField : public ::testing::Test 
-{
-protected:
-	TBitField* bf, * a1, * a2, * a3, * b0, * b1, * b2, * b3, * c0,
-		* c1, * d0, * d1, * e0, * f0, * f1, * f2, * f3;
-
-	void SetUp();
-
-	void SetUp2(int k);
-
-	void TearDown();
-};
 
 #endif

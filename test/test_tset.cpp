@@ -2,6 +2,20 @@
 
 #include <gtest.h>
 
+class TestTSet : public ::testing::Test
+{
+protected:
+
+	void SetUp() 
+	{
+		s = new TSet(5);
+	}
+
+	void TearDown() {}
+	
+	TSet* s;
+};
+
 TEST_F(TestTSet, can_get_max_power_set)
 {
   EXPECT_EQ(5, s->GetMaxPower());

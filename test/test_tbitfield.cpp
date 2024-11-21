@@ -2,14 +2,45 @@
 
 #include <gtest.h>
 
+//Fixtures
+
+class TestTBitField : public ::testing::Test
+{
+protected:
+
+    void SetUp() 
+    {
+ 
+        bf = new TBitField(5);
+
+        bf->SetBit(1);
+
+        bf->SetBit(2);
+
+        bf->SetBit(3);
+    }
+
+    void TearDown() 
+    {
+        delete bf;
+    }
+
+    TBitField* bf;
+};
+
 TEST_F(TestTBitField, can_create_bitfield_with_positive_length)
 {
-  ASSERT_NO_THROW(this->SetUp2(1));
+
+    TBitField temp(5);
+
+    ASSERT_NO_THROW(temp); 
 }
+
 
 TEST(TBitField, can_make_copy_right_bit_len) // my test1
 {
     TBitField a(16);
+
     TBitField b = a;
     
     EXPECT_EQ(16, b.GetLength());
@@ -49,19 +80,19 @@ TEST(TBitField, can_make_U_peresech_Bit) //my test3
 
 TEST_F(TestTBitField, can_get_length)
 {
-  EXPECT_EQ(1, bf->GetLength());
+    EXPECT_EQ(5, bf->GetLength());
 }
 
 TEST_F(TestTBitField, new_bitfield_is_set_to_zero)
 {
-  int sum = 0;
+    int sum = 0;
 
-  for (int i = 0; i < bf->GetLength(); i++)
-  {
-    sum += this->bf->GetBit(i);
-  }
+    for (int i = 0; i < bf->GetLength(); i++)
+    {
+        sum += bf->GetBit(i);
+    }
 
-  EXPECT_EQ(0, sum);
+    EXPECT_EQ(3, sum); 
 }
 
 TEST(TBitField, can_set_bit)

@@ -41,16 +41,4 @@ public:
   friend ostream &operator<<(ostream &ostr, const TSet &bf);
 };
 
-class TestTSet : public ::testing::Test 
-{
-protected:
-	TSet* s, * s0, * s1, * s2, * s3, * s4, * s5, * s6, * s7, * s00, * s01, * s02, * s03, * s04;
-
-	void SetUp();
-
-	void SetUp2(int k);
-
-	void TearDown();
-};
-
 #endif
