@@ -11,9 +11,13 @@ protected:
 		s = new TSet(5);
 	}
 
-	void TearDown() {}
+	void TearDown() 
+	{
+		delete s;
+	}
 	
 	TSet* s;
+
 };
 
 TEST_F(TestTSet, can_get_max_power_set)
